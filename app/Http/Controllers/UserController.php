@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
+use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -21,7 +22,7 @@ class UserController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    use ThrottlesLogins;
 
     /**
      * Create a new authentication controller instance.
@@ -35,8 +36,17 @@ class UserController extends Controller
     /**
      *
      */
-    protected function register()
+    protected function getRegister()
     {
+        return view('user.register');
+    }
+
+    /**
+     *
+     */
+    protected function postRegister(Request $request)
+    {
+        dd($request);
         return view('user.register');
     }
 

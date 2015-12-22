@@ -1,5 +1,8 @@
 @extends('layouts.master')
 
 @section('content')
-    {!! Form::checkbox('opt_in_mail', 'opt_in_mail', true, [ 'id' => 'opt_in_mail' ]) !!}
+    {!! Form::open(['route' => 'user.postRegister']) !!}
+    {!! Form::input('text', 'first_name') !!}
+    {!! Form::submit('Register') !!}
+    {!! Form::close() !!}
 @stop
