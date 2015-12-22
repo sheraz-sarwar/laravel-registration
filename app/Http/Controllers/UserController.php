@@ -35,15 +35,9 @@ class UserController extends Controller
     /**
      *
      */
-    protected function registerForm()
+    protected function register()
     {
-        $credentials = [
-            'email'    => 'john.doe@example.com',
-            'password' => 'password',
-        ];
-
-        $user = Sentinel::register($credentials);
-        dd($user);
+        return view('user.register');
     }
 
     /**
