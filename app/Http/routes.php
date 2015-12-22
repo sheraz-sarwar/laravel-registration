@@ -13,7 +13,8 @@
 use Illuminate\Routing\Router;
 
 $router->group(['prefix' => 'user'], function (Router $router) {
-    $router->get('register', ['as' => 'user.register', 'uses' => 'UserController@register']);
+    $router->get('register', ['as' => 'user.getRegister', 'uses' => 'UserController@getRegister']);
+    $router->post('register', ['as' => 'user.postRegister', 'uses' => 'UserController@postRegister']);
 });
 
 Route::get('/', function () {
