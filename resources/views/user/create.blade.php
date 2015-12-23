@@ -25,28 +25,18 @@
             {!! Form::label('gender', 'Gender') !!}
             <div class="row col-md-offset-0">
                 <label class="radio-inline">
-                    {!! Form::radio('gender', 'male', ['class' => 'form-control']) !!} Male
+                    {!! Form::radio('gender', 'm', false) !!} Male
                 </label>
                 <label class="radio-inline">
-                    {!! Form::radio('gender', 'female', ['class' => 'form-control']) !!} Female
+                    {!! Form::radio('gender', 'f', false) !!} Female
                 </label>
             </div>
         </div>
         <div class="form-group">
-            {!! Form::label('day', 'Date of Birth') !!}
             <div class="row">
-                <div class="col-md-5">
-                    <div class="row">
-                        <div class="col-xs-2">
-                            {!! Form::text('day', null, ['class' => 'form-control', 'placeholder' => 'DD']) !!}
-                        </div>
-                        <div class="col-xs-2">
-                            {!! Form::text('month', null, ['class' => 'form-control', 'placeholder' => 'MM']) !!}
-                        </div>
-                        <div class="col-xs-3">
-                            {!! Form::text('year', null, ['class' => 'form-control', 'placeholder' => 'YYYY']) !!}
-                        </div>
-                    </div>
+                <div class="col-xs-2">
+                    {!! Form::label('date_of_birth', 'Date of Birth') !!}
+                    {!! Form::date('date_of_birth', null, ['class' => 'form-control']) !!}
                 </div>
             </div>
         </div>

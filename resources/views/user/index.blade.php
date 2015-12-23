@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row">
-        @if (isset($users) && !empty($users))
+        @if (isset($users) && !$users->isEmpty())
             <table class="table table-hover">
                 <tr>
                     <th>First Name</th>
@@ -18,6 +18,8 @@
                 @endforeach
             </table>
         @endif
-        {!! link_to_route('user.create', '+ Create a new user', null, ['class' => 'btn btn-primary']) !!}
+        <div class="text-center">
+            {!! link_to_route('user.create', '+ Create a new user', null, ['class' => 'btn btn-primary']) !!}
+        </div>
     </div>
 @stop
