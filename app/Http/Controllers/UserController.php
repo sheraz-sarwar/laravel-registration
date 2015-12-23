@@ -2,81 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Cartalyst\Sentinel\Laravel\Facades\Sentinel;
 use Illuminate\Http\Request;
-use Validator;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
-    use ThrottlesLogins;
-
     /**
-     * Create a new authentication controller instance.
+     * Display a listing of the resource.
      *
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function index()
     {
-       $this->middleware('guest', ['except' => 'getLogout']);
+        return view('user.create');
     }
 
     /**
+     * Show the form for creating a new resource.
      *
+     * @return \Illuminate\Http\Response
      */
-    protected function getRegister()
+    public function create()
     {
-        return view('user.register');
+        return view('user.create');
     }
 
     /**
+     * Store a newly created resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected function postRegister(Request $request)
+    public function store(Request $request)
     {
-        dd($request);
-        return view('user.register');
+        //
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Display the specified resource.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function show($id)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+        //
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * Show the form for editing the specified resource.
      *
-     * @param  array  $data
-     * @return User
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    protected function create(array $data)
+    public function edit($id)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

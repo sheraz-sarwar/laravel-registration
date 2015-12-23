@@ -10,12 +10,8 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-use Illuminate\Routing\Router;
 
-$router->group(['prefix' => 'user'], function (Router $router) {
-    $router->get('register', ['as' => 'user.getRegister', 'uses' => 'UserController@getRegister']);
-    $router->post('register', ['as' => 'user.postRegister', 'uses' => 'UserController@postRegister']);
-});
+$router->resource('user', 'UserController');
 
 Route::get('/', function () {
     return view('welcome');
