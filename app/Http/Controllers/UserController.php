@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Services\UserRegistration;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+
+    protected $sentinel;
+
+    public function __construct()
+    {
+        $this->sentinel = app('sentinel');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +25,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('user.create');
+        $users = $this->sentinel->getUserRepository()->all();
+
+        return view('user.index', ['users' => $users]);
     }
 
     /**
@@ -31,18 +43,27 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param CreateUserRequest $request
+     * @param UserRegistration $registration
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request, UserRegistration $registration)
     {
-        //
+        $registration->setFirstName($request->input('first_name'))
+            ->setLastName($request->input('last_name'))
+            ->setEmail($request->input('email'))
+            ->setPassword($request->input('password'))
+            ->setGender($request->input('gender'))
+            ->setDateOfBirth($request->input('date_of_birth'))
+            ->register();
+
+        return redirect()->route('user.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -53,7 +74,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -64,8 +85,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -76,7 +97,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
