@@ -42,7 +42,7 @@
         </div>
         <div class="form-group">
             {!! Form::label('password', 'Password') !!}
-            {!! Form::text('password', null, ['class' => 'form-control']) !!}
+            {!! Form::password('password', ['class' => 'form-control']) !!}
         </div>
         <div class="form-group">
             {!! Form::submit('Register', ['class' => 'btn btn-success form-control']) !!}
