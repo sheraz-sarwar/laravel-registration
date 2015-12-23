@@ -24,11 +24,12 @@ class CreateUserRequest extends Request
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'gender' => 'required'
-            //
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'email' => 'required|email|min:3|max:255|unique:users',
+            'password' => 'max:255',
+            'gender' => 'required|in:m,f',
+            'date_of_birth' => 'required|date|after:01/01/1900|before:today',
         ];
     }
 }
