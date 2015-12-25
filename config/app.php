@@ -148,7 +148,7 @@ return [
         /*
          * Installed Packages Service Providers...
          */
-        Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+        App\Providers\ExtendedSentinelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
     ],

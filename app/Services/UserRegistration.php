@@ -54,7 +54,9 @@ class UserRegistration
      */
     public function setPassword($password)
     {
-        $this->user->put('password', $password);
+        if (!empty($password)) {
+            $this->user->put('password', $password);
+        }
         return $this;
     }
 
