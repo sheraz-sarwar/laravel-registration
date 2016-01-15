@@ -6,17 +6,19 @@ use App\Http\Requests\CreateUserRequest;
 use App\Services\UserRegistration;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
 
     protected $sentinel;
 
+    protected $userRepository;
+
     public function __construct()
     {
+        // Todo: Get dependency injection working here and move to UserRepository
         $this->sentinel = app('sentinel');
+        $this->userRepository = app('sentinel.users');
     }
 
     /**
@@ -26,8 +28,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = $this->sentinel->getUserRepository()->all();
-        //return view('user.index', ['users' => $users]);
+        if ($this->sentinel->check()) {
+            $users = $this->sentinel->getUserRepository()->all();
+            return view('user.index', ['users' => $users]);
+        }
 
         return view('user.login');
     }
@@ -42,11 +46,26 @@ class UserController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (app('sentinel')->authenticate($credentials)) {
+        if ($this->sentinel->authenticate($credentials)) {
             return view('welcome');
         } else {
             return redirect()->back();
         }
+    }
+
+    public function activate($id, $code)
+    {
+        $user = $this->sentinel->findById($id);
+
+        $activated = $this->userRepository->activate($user, $code);
+
+        if (!$activated) {
+            return 'Failed to activate';
+        }
+
+        $this->sentinel->login($user);
+
+        return redirect()->route('user.index');
     }
 
     /**
