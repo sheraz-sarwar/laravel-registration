@@ -1,13 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
-    @if ($errors->any())
-        <ul class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                <li>{!! $error !!}</li>
-            @endforeach
-        </ul>
-    @endif
+    <div class="row">
+        <div class="col-md-6">
+            @if ($errors->any())
+                <ul class="alert alert-danger">
+                    @foreach ($errors->all() as $error)
+                        <li>{!! $error !!}</li>
+                    @endforeach
+                </ul>
+            @endif
+        </div>
+    </div>
     <div class="form-container col-md-6">
     {!! Form::open(['route' => 'user.store']) !!}
         {!! link_to_route('user.getLogin', 'Already registered? Login here', [], ['class' => 'pull-right']) !!}
