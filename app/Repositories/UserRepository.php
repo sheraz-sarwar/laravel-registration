@@ -53,6 +53,7 @@ class UserRepository extends IlluminateUserRepository
      */
     public function activate(User $user, $code)
     {
+        // Todo: Error handling
         $activationRepo = app('sentinel.activations');
 
         if ($activationRepo->completed($user)) {

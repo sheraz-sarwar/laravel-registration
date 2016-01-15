@@ -9,6 +9,7 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Role</th>
+                    <th>Activated</th>
                 </tr>
                 @foreach ($users as $user)
                     <tr>
@@ -16,6 +17,7 @@
                         <td>{{ $user->last_name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->roles->first()->name }}</td>
+                        <td>{{ ($user->activations->pluck('completed')->search(true) !== false) ? 'Yes' : 'No' }}</td>
                     </tr>
                 @endforeach
             </table>
