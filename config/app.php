@@ -146,11 +146,12 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         /*
-         * Installed Packages Service Providers...
+         * Installed Package/Custom Service Providers...
          */
         App\Providers\ExtendedSentinelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        App\Providers\ValidationServiceProvider::class,
     ],
 
     /*
