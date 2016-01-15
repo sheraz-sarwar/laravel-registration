@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Mail;
 
 class UserRegistration
 {
@@ -15,7 +16,22 @@ class UserRegistration
 
     public function register()
     {
-        app('sentinel')->register($this->user->toArray());
+        // Todo: Sanity check
+        $user = app('sentinel')->register($this->user->toArray());
+
+        if ($this->user->has('password')) {
+            $role = app('sentinel')->findRoleByName('User');
+        } else {
+            $role = app('sentinel')->findRoleByName('Guest');
+        }
+
+        $role->users()->attach($user);
+
+        Mail::send('welcome', ['user' => $user], function ($m) use ($user) {
+            $m->to($user->email, $user->first_name)->subject('Testing...');
+        });
+
+        return $user;
     }
 
     /**
