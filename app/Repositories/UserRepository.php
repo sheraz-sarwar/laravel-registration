@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\User;
 use Cartalyst\Sentinel\Users\IlluminateUserRepository;
 use InvalidArgumentException;
 
@@ -32,6 +33,10 @@ class UserRepository extends IlluminateUserRepository
         return true;
     }
 
+    /**
+     * @param string $role
+     * @return mixed
+     */
     public function findUsersByRole($role)
     {
         $users = $this->createModel()->whereHas('roles', function ($query) use ($role) {
@@ -39,5 +44,25 @@ class UserRepository extends IlluminateUserRepository
         })->get();
 
         return $users;
+    }
+
+    /**
+     * @param User $user
+     * @param $code
+     * @return mixed
+     */
+    public function activate(User $user, $code)
+    {
+        $activationRepo = app('sentinel.activations');
+
+        if ($activationRepo->completed($user)) {
+            return 'Already completed';
+        }
+
+        if (!$activationRepo->exists($user)) {
+            return 'Does not exist';
+        }
+
+        return $activationRepo->complete($user, $code);
     }
 }
