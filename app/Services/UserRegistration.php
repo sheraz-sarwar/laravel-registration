@@ -26,6 +26,7 @@ class UserRegistration
         }
 
         $role->users()->attach($user);
+        app('sentinel.activations')->create($user);
 
         Mail::send('welcome', ['user' => $user], function ($m) use ($user) {
             $m->to($user->email, $user->first_name)->subject('Testing...');
