@@ -7,6 +7,7 @@ use App\Services\UserRegistration;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -25,9 +26,27 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->sentinel->getUserRepository()->all();
+        //$users = $this->sentinel->getUserRepository()->all();
+        //return view('user.index', ['users' => $users]);
 
-        return view('user.index', ['users' => $users]);
+        return view('user.login');
+    }
+
+    /**
+     * // Todo: create a login request
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (app('sentinel')->authenticate($credentials)) {
+            return view('welcome');
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
