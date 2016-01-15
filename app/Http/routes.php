@@ -14,6 +14,7 @@
 $router->group(['prefix' => 'user'], function ($router) {
     $router->get('login', ['as' => 'user.getLogin',  'uses' => 'UserController@index']);
     $router->post('login', ['as' => 'user.postLogin', 'uses' => 'UserController@login']);
+    $router->get('activate/{id}/{code}', ['as' => 'user.activate', 'uses' => 'UserController@activate']);
 });
 
 $router->resource('user', 'UserController');
