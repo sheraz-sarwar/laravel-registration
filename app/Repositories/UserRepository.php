@@ -31,4 +31,13 @@ class UserRepository extends IlluminateUserRepository
 
         return true;
     }
+
+    public function findUsersByRole($role)
+    {
+        $users = $this->createModel()->whereHas('roles', function ($query) use ($role) {
+            $query->where('name', '=', $role);
+        })->get();
+
+        return $users;
+    }
 }
