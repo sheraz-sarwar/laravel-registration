@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => env('MAIL_FROM', 'admin@digitalocean.com'), 'name' => env('MAIL_NAME', 'Admin')],
 
     /*
     |--------------------------------------------------------------------------
