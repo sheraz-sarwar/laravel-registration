@@ -87,6 +87,8 @@ return [
     |
     */
 
+    'user_exists' => 'We already have an account registered with that email address. ' . link_to_route('user.getLogin', 'Click here to log in.'),
+
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
