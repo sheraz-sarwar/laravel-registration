@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('leaderboard', function() {
+    return view('leaderboard');
+});
+
 $router->group(['prefix' => 'user'], function ($router) {
     $router->get('login', ['as' => 'user.getLogin',  'uses' => 'UserController@index']);
     $router->post('login', ['as' => 'user.postLogin', 'uses' => 'UserController@login']);
