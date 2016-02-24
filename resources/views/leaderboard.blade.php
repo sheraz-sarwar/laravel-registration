@@ -15,7 +15,7 @@
         </style>
     </head>
     <body>
-        <div id="chartdiv"></div>
+        <div id="chart-div"></div>
         <script type="text/javascript" src="{{ asset('js/chart.min.js') }}"></script>
     </body>
 </html>
