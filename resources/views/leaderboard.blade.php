@@ -8,7 +8,7 @@
             body {
                 background-color: #FAFAFA;
             }
-            #chartdiv {
+            #chart-div {
                 width: 100%;
                 min-height: 985px;
             }
